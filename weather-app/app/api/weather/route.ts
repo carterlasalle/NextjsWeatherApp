@@ -12,14 +12,19 @@ export async function GET(request: Request) {
   }
 
   try {
-    const currentWeatherResponse = await fetch(`${BASE_URL}/weather?q=${city}&appid=${API_KEY}&units=metric`);
-    const forecastResponse = await fetch(`${BASE_URL}/forecast?q=${city}&appid=${API_KEY}&units=metric`);
+    const currentWeatherResponse = await fetch(`${BASE_URL}/weather?q=${city}&appid=${API_KEY}&units=imperial`);
+    const forecastResponse = await fetch(`${BASE_URL}/forecast?q=${city}&appid=${API_KEY}&units=imperial`);
+
+    if (!currentWeatherResponse.ok || !forecastResponse.ok) {
+      throw new Error('Failed to fetch weather data');
+    }
 
     const currentWeather = await currentWeatherResponse.json();
     const forecast = await forecastResponse.json();
 
     return NextResponse.json({ currentWeather, forecast });
   } catch (error) {
+    console.error('Error fetching weather data:', error);
     return NextResponse.json({ error: 'Failed to fetch weather data' }, { status: 500 });
   }
 }
