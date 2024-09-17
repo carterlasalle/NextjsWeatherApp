@@ -104,7 +104,7 @@ The current workflow does not include deployment steps. To deploy your app, you 
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please feel free to submit a Pull Request!!
 
 ## License
 
