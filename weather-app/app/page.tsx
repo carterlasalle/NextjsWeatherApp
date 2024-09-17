@@ -372,6 +372,10 @@ interface WeatherData {
   };
 }
 
+interface ErrorResponse {
+  error: string;
+}
+
 export default function WeatherApp() {
   const [city, setCity] = useState("")
   const [weather, setWeather] = useState<WeatherData | null>(null)
@@ -389,12 +393,13 @@ export default function WeatherApp() {
     setIsLoading(true)
     try {
       const response = await fetch(`/api/weather?city=${encodeURIComponent(city)}`)
-      const data: WeatherData = await response.json()
-
+      
       if (!response.ok) {
-        throw new Error(data.error || ERROR_CODES.API_ERROR)
+        const errorData: ErrorResponse = await response.json()
+        throw new Error(errorData.error || ERROR_CODES.API_ERROR)
       }
 
+      const data: WeatherData = await response.json()
       setWeather(data)
       setError("")
       setShowConfetti(true)
