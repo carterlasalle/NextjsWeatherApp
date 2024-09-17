@@ -17,10 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <title>Weather App</title>
-      </head>
-      <body>
+      <body className={inter.className}>
         {children}
         <SpeedInsights />
       </body>
