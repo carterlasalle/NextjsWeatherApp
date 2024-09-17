@@ -1,7 +1,22 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
+interface WeatherData {
+  name: string;
+  main: {
+    temp: number;
+    feels_like: number;
+    humidity: number;
+  };
+  weather: Array<{
+    description: string;
+  }>;
+  wind: {
+    speed: number;
+  };
+}
+
 interface CurrentWeatherProps {
-  data: any;
+  data: WeatherData;
 }
 
 export function CurrentWeather({ data }: CurrentWeatherProps) {

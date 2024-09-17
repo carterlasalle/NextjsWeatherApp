@@ -329,9 +329,52 @@ const PulsingButton = ({ isLoading }: { isLoading: boolean }) => (
   </motion.div>
 )
 
+interface WeatherData {
+  currentWeather: {
+    name: string;
+    main: {
+      temp: number;
+      feels_like: number;
+      humidity: number;
+    };
+    weather: Array<{
+      main: string;
+      description: string;
+      icon: string;
+    }>;
+    wind: {
+      speed: number;
+    };
+    clouds: {
+      all: number;
+    };
+    sys: {
+      sunrise: number;
+      sunset: number;
+    };
+  };
+  forecast: {
+    list: Array<{
+      dt: number;
+      main: {
+        temp: number;
+        humidity: number;
+      };
+      weather: Array<{
+        main: string;
+        icon: string;
+      }>;
+      wind: {
+        speed: number;
+      };
+      pop: number;
+    }>;
+  };
+}
+
 export default function WeatherApp() {
   const [city, setCity] = useState("")
-  const [weather, setWeather] = useState<any>(null)
+  const [weather, setWeather] = useState<WeatherData | null>(null)
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [showConfetti, setShowConfetti] = useState(false)
@@ -346,7 +389,7 @@ export default function WeatherApp() {
     setIsLoading(true)
     try {
       const response = await fetch(`/api/weather?city=${encodeURIComponent(city)}`)
-      const data = await response.json()
+      const data: WeatherData = await response.json()
 
       if (!response.ok) {
         throw new Error(data.error || ERROR_CODES.API_ERROR)
@@ -356,8 +399,12 @@ export default function WeatherApp() {
       setError("")
       setShowConfetti(true)
       setTimeout(() => setShowConfetti(false), 5000)
-    } catch (err: any) {
-      setError(err.message || ERROR_CODES.API_ERROR)
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message || ERROR_CODES.API_ERROR)
+      } else {
+        setError(ERROR_CODES.API_ERROR)
+      }
       setWeather(null)
     } finally {
       setIsLoading(false)
