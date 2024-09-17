@@ -20,6 +20,12 @@ A Next.js weather app that allows users to search for weather information of a c
 # Updated File structure
 weather-app/
 ├── app/
+│   ├── api/
+│   │   └── weather/
+│   │       └── route.ts
+│   ├── components/
+│   │   ├── CurrentWeather.tsx
+│   │   └── Forecast.tsx
 │   ├── favicon.ico
 │   ├── globals.css
 │   ├── layout.tsx
