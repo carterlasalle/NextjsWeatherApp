@@ -18,5 +18,24 @@ A Next.js weather app that allows users to search for weather information of a c
 - Tailwind CSS: https://tailwindcss.com/docs
 
 # Updated File structure
+weather-app/
+├── app/
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── public/
+│   ├── next.svg
+│   └── vercel.svg
+├── .eslintrc.json
+├── .gitignore
+├── next-env.d.ts
+├── next.config.mjs
+├── package-lock.json
+├── package.json
+├── postcss.config.mjs
+├── README.md
+├── tailwind.config.ts
+└── tsconfig.json
 
 
