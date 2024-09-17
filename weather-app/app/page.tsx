@@ -555,30 +555,32 @@ export default function WeatherApp() {
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                    {weather.forecast.list.filter((_: any, index: number) => index % 8 === 0).map((day: any, index: number) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                      >
-                        <Card className={`bg-gradient-to-br ${getBackgroundGradient(day.main.temp)} hover:shadow-lg transition-shadow duration-300`}>
-                          <CardContent className="p-4">
-                            <h3 className="font-semibold text-white">{formatDate(day.dt)}</h3>
-                            <div className="flex items-center gap-2 mt-2">
-                              {getWeatherIcon(day.weather[0].icon)}
-                              <span className="text-2xl font-bold text-white">{Math.round(day.main.temp)}°F</span>
-                            </div>
-                            <p className="text-sm text-white/90">{day.weather[0].main}</p>
-                            <div className="mt-2 text-xs text-white/80">
-                              <p>Humidity: {day.main.humidity}%</p>
-                              <p>Wind: {Math.round(day.wind.speed)} mph</p>
-                              <p>Precipitation: {(day.pop * 100).toFixed(0)}%</p>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </motion.div>
-                    ))}
+                    {weather.forecast.list
+                      .filter((_, index: number) => index % 8 === 0)
+                      .map((day, index: number) => (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: index * 0.1 }}
+                        >
+                          <Card className={`bg-gradient-to-br ${getBackgroundGradient(day.main.temp)} hover:shadow-lg transition-shadow duration-300`}>
+                            <CardContent className="p-4">
+                              <h3 className="font-semibold text-white">{formatDate(day.dt)}</h3>
+                              <div className="flex items-center gap-2 mt-2">
+                                {getWeatherIcon(day.weather[0].icon)}
+                                <span className="text-2xl font-bold text-white">{Math.round(day.main.temp)}°F</span>
+                              </div>
+                              <p className="text-sm text-white/90">{day.weather[0].main}</p>
+                              <div className="mt-2 text-xs text-white/80">
+                                <p>Humidity: {day.main.humidity}%</p>
+                                <p>Wind: {Math.round(day.wind.speed)} mph</p>
+                                <p>Precipitation: {(day.pop * 100).toFixed(0)}%</p>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        </motion.div>
+                      ))}
                   </div>
                 </CardContent>
               </Card>
