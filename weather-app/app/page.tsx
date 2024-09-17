@@ -9,6 +9,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { motion, AnimatePresence } from "framer-motion"
 import { Skeleton } from "@/components/ui/skeleton"
 import Confetti from 'react-confetti'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const ERROR_CODES = {
   CITY_NOT_FOUND: "City not found. Please check the city name and try again.",
